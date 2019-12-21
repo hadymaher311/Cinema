@@ -20,7 +20,8 @@ Route::group([
 
 ], function ($router) {
 
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('me', 'AuthController@me');
+    Route::post('login', 'User\AuthController@login');
+    Route::post('register', 'User\AuthController@register');
+    Route::post('logout', 'User\AuthController@logout');
+    Route::post('me', 'User\AuthController@me');
 });
