@@ -23,6 +23,7 @@ class MovieResource extends JsonResource
                 'card_url' => env('APP_URL') . $this->image->getUrl('card'),
                 'thumb_url' => env('APP_URL') . $this->image->getUrl('thumb'),
             ] : null,
+            'screening' => ScreeningResource::collection($this->whenLoaded('screening')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

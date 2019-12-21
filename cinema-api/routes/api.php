@@ -24,4 +24,14 @@ Route::group([
     Route::post('me', 'User\AuthController@me');
 });
 
+Route::group([
+
+    'prefix' => 'user'
+
+], function ($router) {
+    Route::get('movies', 'User\MoviesController@index');
+    Route::get('movies/{movie}', 'User\MoviesController@show');
+    Route::get('movies/{screening}/reservations', 'User\ReservationsController@index');
+});
+
 Route::get('/welcome/movies', 'WelcomeController@index');

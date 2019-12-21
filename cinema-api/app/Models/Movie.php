@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Screening;
 use Spatie\MediaLibrary\Models\Media;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -28,5 +29,10 @@ class Movie extends Model implements HasMedia
     public function getImageAttribute()
     {
         return $this->getMedia('poster')->last();
+    }
+
+    public function screening()
+    {
+        return $this->hasMany(Screening::class);
     }
 }
