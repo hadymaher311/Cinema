@@ -32,6 +32,7 @@ Route::group([
     Route::get('movies', 'User\MoviesController@index');
     Route::get('movies/{movie}', 'User\MoviesController@show');
     Route::get('movies/{screening}/reservations', 'User\ReservationsController@index');
+    Route::post('movies/{seat}/reservations/{screening}/store', 'User\ReservationsController@store');
 });
 
 Route::get('/welcome/movies', 'WelcomeController@index');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\SeatResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ScreenResource extends JsonResource
@@ -14,6 +15,12 @@ class ScreenResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'cols' => $this->cols,
+            'rows' => $this->rows,
+            'seats' => SeatResource::collection($this->whenLoaded('seats')),
+            'created_at' => $this->created_at,
+            'upadted_at' => $this->upadted_at,
+        ];
     }
 }

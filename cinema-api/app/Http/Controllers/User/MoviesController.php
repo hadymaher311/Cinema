@@ -9,6 +9,10 @@ use App\Http\Resources\MovieResource;
 
 class MoviesController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth:api', 'is_user']);
+    }
+    
     /**
      * get all movies
      */
