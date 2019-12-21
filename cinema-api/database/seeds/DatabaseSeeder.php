@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         factory(User::class, 10)->create();
         $this->call(MoviesSeeder::class);
         factory(Screen::class, 10)->create();
+        $this->call(SeatsSeeder::class);
         factory(Screening::class, 100)->create();
         factory(Reservation::class, 100)->create();
     }

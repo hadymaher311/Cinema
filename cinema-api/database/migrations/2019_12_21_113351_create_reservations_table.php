@@ -17,8 +17,10 @@ class CreateReservationsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('screening_id')->unsigned();
+            $table->bigInteger('seat_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('screening_id')->references('id')->on('screenings')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('seat_id')->references('id')->on('seats')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
