@@ -42,7 +42,12 @@ class MoviesController extends Controller
     public function screening(Request $request, Movie $movie)
     {
         $per_page = $request->per_page ? $request->per_page : 10;
-        return ScreeningResource::collection($movie->screening()->orderBy('id', 'desc')->paginate($per_page)->load('movie'));
+        return ScreeningResource::collection($movie->screening()->orderBy('id', 'desc')->paginate($per_page));
+    }
+
+    public function show(Movie $movie)
+    {
+        return new MovieResource($movie);
     }
 
     public function screeningStore(Request $request, Movie $movie)

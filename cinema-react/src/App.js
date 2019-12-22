@@ -13,6 +13,7 @@ import Screening from "./pages/user/Screening";
 import AuthAdminRoute from "./components/AuthAdminRoute";
 import Users from "./pages/admin/Users";
 import AdminMovies from "./pages/admin/Movies";
+import AdminScreening from "./pages/admin/Screening";
 import CreateMovie from "./pages/admin/CreateMovie";
 
 function App() {
@@ -28,6 +29,10 @@ function App() {
         <AuthAdminRoute path="/admin/users" component={Users} />
         <AuthAdminRoute exact path="/admin/movies" component={AdminMovies} />
         <AuthAdminRoute path="/admin/movies/create" component={CreateMovie} />
+        <AuthAdminRoute
+          path="/admin/movies/screening/:id"
+          component={AdminScreening}
+        />
       </Layout>
     </Router>
   );

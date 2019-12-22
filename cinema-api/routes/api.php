@@ -43,6 +43,7 @@ Route::group([
     Route::get('movies', 'Admin\MoviesController@index');
     Route::post('movies/store', 'Admin\MoviesController@store');
     Route::get('movies/{movie}/screening', 'Admin\MoviesController@screening');
+    Route::get('movies/{movie}/show', 'Admin\MoviesController@show');
     Route::post('movies/store/{movie}/screening', 'Admin\MoviesController@screeningStore');
 });
 

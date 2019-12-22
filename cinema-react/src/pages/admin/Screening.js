@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import moment from "moment";
 import Axios from "axios";
-import Activate from "../../components/Activate";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const FilterComponent = ({ filterText, onFilter, onClear }) => (
   <>
@@ -30,23 +31,19 @@ const columns = [
     maxWidth: "60px"
   },
   {
-    name: "Name",
-    selector: "name",
+    name: "From",
+    selector: "from",
     sortable: true
   },
   {
-    name: "Username",
-    selector: "username",
+    name: "To",
+    selector: "to",
     sortable: true
   },
   {
-    name: "Email",
-    selector: "email",
+    name: "Screen",
+    selector: "screen_id",
     sortable: true
-  },
-  {
-    name: "Birth date",
-    selector: "birth_date"
   },
   {
     name: "Created at",
@@ -54,32 +51,29 @@ const columns = [
     cell: row => {
       return moment(row.created_at).fromNow();
     }
-  },
-  {
-    name: "Is Admin",
-    selector: "is_admin",
-    cell: row => (
-      <Activate
-        url={`http://localhost:8000/api/admin/users/toggle_admin/${row.id}`}
-        checked={row.is_admin}
-      />
-    )
   }
 ];
 
-const Users = props => {
+const actions = (
+  <Link to="/admin/movies/create" className="btn btn-success">
+    + Add new Screening
+  </Link>
+);
+
+const Screening = props => {
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [totalRows, setTotalRows] = useState(0);
   const [perPage, setPerPage] = useState(10);
+  const [movieId, setMovieId] = useState(props.match.params.id);
+  const [movie, setMovie] = useState(null);
 
   const filteredItems = data.filter(
     item =>
-      (item.name && item.name.includes(filterText)) ||
-      (item.email && item.email.includes(filterText)) ||
-      (item.username && item.username.includes(filterText))
+      (item.from && item.from.includes(filterText)) ||
+      (item.to && item.to.includes(filterText))
   );
 
   const subHeaderComponentMemo = React.useMemo(() => {
@@ -101,13 +95,28 @@ const Users = props => {
 
   useEffect(() => {
     fetchData(1, perPage);
+    fetchMovie();
   }, [perPage]);
+
+  const fetchMovie = () => {
+    setLoading(true);
+
+    Axios.get(`http://localhost:8000/api/admin/movies/${movieId}/show`)
+      .then(response => {
+        setMovie(response.data.data);
+      })
+      .catch(error => {
+        Swal.fire("Oops...", "Something went wrong!", "error");
+      });
+
+    setLoading(false);
+  };
 
   const fetchData = async (page, perPage) => {
     setLoading(true);
 
     Axios.get(
-      `http://localhost:8000/api/admin/users?page=${page}&per_page=${perPage}`
+      `http://localhost:8000/api/admin/movies/${movieId}/screening?page=${page}&per_page=${perPage}`
     )
       .then(response => {
         setData(response.data.data);
@@ -129,29 +138,33 @@ const Users = props => {
     fetchData(page, newPerPage);
   };
 
-  return (
-    <div>
-      <div className="container mt-5 mb-5">
-        <DataTable
-          title="Users Table"
-          columns={columns}
-          data={filteredItems}
-          paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
-          progressPending={loading}
-          pagination
-          paginationServer
-          highlightOnHover
-          subHeader
-          subHeaderComponent={subHeaderComponentMemo}
-          progressComponent={"Loading..."}
-          persistTableHead
-          paginationTotalRows={totalRows}
-          onChangeRowsPerPage={handlePerRowsChange}
-          onChangePage={handlePageChange}
-        />
+  if (movie) {
+    return (
+      <div>
+        <div className="container mt-5 mb-5">
+          <DataTable
+            title={`Screening Table for ${movie.name}`}
+            columns={columns}
+            data={filteredItems}
+            actions={actions}
+            paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
+            progressPending={loading}
+            pagination
+            paginationServer
+            highlightOnHover
+            subHeader
+            subHeaderComponent={subHeaderComponentMemo}
+            progressComponent={"Loading..."}
+            persistTableHead
+            paginationTotalRows={totalRows}
+            onChangeRowsPerPage={handlePerRowsChange}
+            onChangePage={handlePageChange}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  return <div className="container mt-5 text-center">Loading...</div>;
 };
 
-export default Users;
+export default Screening;

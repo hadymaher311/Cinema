@@ -74,7 +74,10 @@ const columns = [
         placement="top"
         overlay={<Tooltip id={`tooltip-top`}>Show Screening</Tooltip>}
       >
-        <Link className="btn btn-primary btn-sm" to="/">
+        <Link
+          className="btn btn-primary btn-sm"
+          to={`/admin/movies/screening/${row.id}`}
+        >
           <i className="fas fa-tv"></i>
         </Link>
       </OverlayTrigger>
@@ -99,8 +102,7 @@ const Movies = props => {
   const filteredItems = data.filter(
     item =>
       (item.name && item.name.includes(filterText)) ||
-      (item.email && item.email.includes(filterText)) ||
-      (item.added_by && item.added_by.includes(filterText))
+      (item.genre && item.genre.includes(filterText))
   );
 
   const subHeaderComponentMemo = React.useMemo(() => {
