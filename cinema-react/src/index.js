@@ -10,7 +10,7 @@ import cookie from "js-cookie";
 import jwt from "jsonwebtoken";
 
 const jwt_secret =
-  "xsrHWRQStAHvOd4Eqe7tXvtKWCgFtkOhSXmmHtLNGVEvnOWAaWGMVtIVWnB8DBjC";
+  "ooiwlfff42rn0Ipp2rBcU5sE6DOqc2zoPVwXyLbPth3Yv5yYxwFgK6ZNHQOU6rha";
 
 let token = cookie.get("token");
 if (token) {

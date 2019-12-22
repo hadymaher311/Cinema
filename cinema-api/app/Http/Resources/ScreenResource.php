@@ -16,6 +16,7 @@ class ScreenResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'cols' => $this->cols,
             'rows' => $this->rows,
             'seats' => SeatResource::collection($this->whenLoaded('seats')),

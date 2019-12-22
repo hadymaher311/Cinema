@@ -18,6 +18,7 @@ class ScreeningResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'from' => $this->from,
             'to' => $this->to,
             'movie_id' => $this->movie_id,

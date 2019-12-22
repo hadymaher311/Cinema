@@ -6,8 +6,9 @@ import Profile from "./pages/Profile";
 import Welcome from "./pages/Welcome";
 import Register from "./pages/auth/Register";
 import GuestRoute from "./components/GuestRoute";
-import AuthRoute from "./components/AuthRoute";
+import AuthUserRoute from "./components/AuthUserRoute";
 import Layout from "./components/Layout";
+import Movies from "./pages/user/Movies";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route exact path="/" component={Welcome} />
           <GuestRoute path="/login" component={Login} />
           <GuestRoute path="/register" component={Register} />
-          <AuthRoute path="/profile" component={Profile} />
+          <AuthUserRoute path="/movies" component={Movies} />
       </Layout>
     </Router>
   );

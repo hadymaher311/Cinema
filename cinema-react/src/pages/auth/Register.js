@@ -41,7 +41,7 @@ class Register extends Component {
       .then(res => {
         cookie.set("token", res.data.access_token);
         this.props.setLogin(res.data.user);
-        this.props.history.push("/profile");
+        this.props.history.push("/");
       })
       .catch(err => {
         this.setState({ errors: err.response.data.errors });
