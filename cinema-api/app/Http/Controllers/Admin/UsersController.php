@@ -9,6 +9,11 @@ use App\Http\Resources\UserResource;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth:api', 'is_admin']);
+    }
+
     /**
      * get all users
      */

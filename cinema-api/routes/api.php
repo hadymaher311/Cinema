@@ -40,6 +40,10 @@ Route::group([
 ], function ($router) {
     Route::get('users', 'Admin\UsersController@index');
     Route::post('users/toggle_admin/{user}', 'Admin\UsersController@toggle_admin');
+    Route::get('movies', 'Admin\MoviesController@index');
+    Route::post('movies/store', 'Admin\MoviesController@store');
+    Route::get('movies/{movie}/screening', 'Admin\MoviesController@screening');
+    Route::post('movies/store/{movie}/screening', 'Admin\MoviesController@screeningStore');
 });
 
 Route::get('/welcome/movies', 'WelcomeController@index');
