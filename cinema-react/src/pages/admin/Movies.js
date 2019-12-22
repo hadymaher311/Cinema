@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import moment from "moment";
 import Axios from "axios";
-import Activate from "../../components/Activate";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const FilterComponent = ({ filterText, onFilter, onClear }) => (
   <>
@@ -30,23 +31,33 @@ const columns = [
     maxWidth: "60px"
   },
   {
+    name: "Poster",
+    selector: "image",
+    cell: row => {
+      return (
+        <img
+          className="img-thumbnail border"
+          style={{ maxWidth: "50px" }}
+          src={row.image.thumb_url}
+          alt={row.name}
+        />
+      );
+    }
+  },
+  {
     name: "Name",
     selector: "name",
     sortable: true
   },
   {
-    name: "Username",
-    selector: "username",
+    name: "Genre",
+    selector: "genre",
     sortable: true
   },
   {
-    name: "Email",
-    selector: "email",
+    name: "Length",
+    selector: "length",
     sortable: true
-  },
-  {
-    name: "Birth date",
-    selector: "birth_date"
   },
   {
     name: "Created at",
@@ -56,18 +67,28 @@ const columns = [
     }
   },
   {
-    name: "Is Admin",
-    selector: "is_admin",
+    name: "Controls",
+    selector: "",
     cell: row => (
-      <Activate
-        url={`http://localhost:8000/api/admin/users/toggle_admin/${row.id}`}
-        checked={row.is_admin}
-      />
+      <OverlayTrigger
+        placement="top"
+        overlay={<Tooltip id={`tooltip-top`}>Show Screening</Tooltip>}
+      >
+        <Link className="btn btn-primary btn-sm" to="/">
+          <i className="fas fa-tv"></i>
+        </Link>
+      </OverlayTrigger>
     )
   }
 ];
 
-const Users = props => {
+const actions = (
+  <Link to="/" className="btn btn-success">
+    + Add new Movie
+  </Link>
+);
+
+const Movies = props => {
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -107,7 +128,7 @@ const Users = props => {
     setLoading(true);
 
     Axios.get(
-      `http://localhost:8000/api/admin/users?page=${page}&per_page=${perPage}`
+      `http://localhost:8000/api/admin/movies?page=${page}&per_page=${perPage}`
     )
       .then(response => {
         setData(response.data.data);
@@ -133,9 +154,10 @@ const Users = props => {
     <div>
       <div className="container mt-5 mb-5">
         <DataTable
-          title="Users Table"
+          title="Movies Table"
           columns={columns}
           data={filteredItems}
+          actions={actions}
           paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
           progressPending={loading}
           pagination
@@ -154,4 +176,4 @@ const Users = props => {
   );
 };
 
-export default Users;
+export default Movies;

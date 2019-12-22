@@ -1,5 +1,5 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Welcome from "./pages/Welcome";
@@ -12,22 +12,23 @@ import Movie from "./pages/user/Movie";
 import Screening from "./pages/user/Screening";
 import AuthAdminRoute from "./components/AuthAdminRoute";
 import Users from "./pages/admin/Users";
+import AdminMovies from "./pages/admin/Movies";
 
 function App() {
   return (
     <Router>
       <Layout>
-          <Route exact path="/" component={Welcome} />
-          <GuestRoute path="/login" component={Login} />
-          <GuestRoute path="/register" component={Register} />
-          <AuthUserRoute exact path="/movies" component={Movies} />
-          <AuthUserRoute path="/movies/:id" component={Movie} />
-          <AuthUserRoute path="/screening/:id" component={Screening} />
-          <AuthAdminRoute path="/admin/users" component={Users} />
+        <Route exact path="/" component={Welcome} />
+        <GuestRoute path="/login" component={Login} />
+        <GuestRoute path="/register" component={Register} />
+        <AuthUserRoute exact path="/movies" component={Movies} />
+        <AuthUserRoute path="/movies/:id" component={Movie} />
+        <AuthUserRoute path="/screening/:id" component={Screening} />
+        <AuthAdminRoute path="/admin/users" component={Users} />
+        <AuthAdminRoute path="/admin/movies" component={AdminMovies} />
       </Layout>
     </Router>
   );
 }
 
 export default App;
-

@@ -28,6 +28,7 @@ function Layout(props) {
             {props.loggedIn && props.user.is_admin ? (
               <React.Fragment>
                 <Nav.Link href="/admin/users">Users</Nav.Link>
+                <Nav.Link href="/admin/movies">Movies</Nav.Link>
               </React.Fragment>
             ) : (
               ""
