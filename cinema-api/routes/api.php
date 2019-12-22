@@ -35,4 +35,11 @@ Route::group([
     Route::post('movies/{seat}/reservations/{screening}/store', 'User\ReservationsController@store');
 });
 
+Route::group([
+    'prefix' => 'admin'
+], function ($router) {
+    Route::get('users', 'Admin\UsersController@index');
+    Route::post('users/toggle_admin/{user}', 'Admin\UsersController@toggle_admin');
+});
+
 Route::get('/welcome/movies', 'WelcomeController@index');
