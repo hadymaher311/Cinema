@@ -4,7 +4,6 @@ import moment from "moment";
 import Axios from "axios";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const FilterComponent = ({ filterText, onFilter, onClear }) => (
   <>
@@ -54,8 +53,11 @@ const columns = [
   }
 ];
 
-const actions = (
-  <Link to="/admin/movies/create" className="btn btn-success">
+const Actions = props => (
+  <Link
+    to={`/admin/screening/create/${props.movieId}`}
+    className="btn btn-success"
+  >
     + Add new Screening
   </Link>
 );
@@ -146,7 +148,7 @@ const Screening = props => {
             title={`Screening Table for ${movie.name}`}
             columns={columns}
             data={filteredItems}
-            actions={actions}
+            actions={<Actions movieId={movieId} />}
             paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
             progressPending={loading}
             pagination

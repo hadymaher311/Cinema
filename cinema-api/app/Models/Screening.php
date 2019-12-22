@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Screening extends Model
 {
+
+    protected $fillable = [
+        'from', 'to', 'screen_id'
+    ];
+
     public function screen()
     {
         return $this->belongsTo(Screen::class);
@@ -18,7 +23,7 @@ class Screening extends Model
     {
         return $this->belongsTo(Movie::class);
     }
-    
+
     public function reservations()
     {
         return $this->hasMany(Reservation::class);

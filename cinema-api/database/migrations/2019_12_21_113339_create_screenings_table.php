@@ -15,8 +15,8 @@ class CreateScreeningsTable extends Migration
     {
         Schema::create('screenings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->dateTime('from');
-            $table->dateTime('to');
+            $table->string('from');
+            $table->string('to');
             $table->bigInteger('movie_id')->unsigned();
             $table->bigInteger('screen_id')->unsigned();
             $table->foreign('movie_id')->references('id')->on('movies')->onUpdate('cascade')->onDelete('cascade');

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Movie;
+use App\Models\Screen;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MovieResource;
+use App\Http\Resources\ScreenResource;
 use App\Http\Resources\ScreeningResource;
 
 class MoviesController extends Controller
@@ -60,5 +62,10 @@ class MoviesController extends Controller
 
         $movie->screening()->create($request->all());
         return response()->json(['message' => 'Added Successfully!']);
+    }
+
+    public function screens()
+    {
+        return ScreenResource::collection(Screen::all());
     }
 }

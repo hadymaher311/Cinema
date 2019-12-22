@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import Error from "../../components/Error";
 
 export class CreateMovie extends Component {
   constructor(props) {
@@ -68,6 +69,11 @@ export class CreateMovie extends Component {
                   autoFocus
                   onChange={this.handleInput}
                 />
+                <Error
+                  error={
+                    this.state.errors["name"] ? this.state.errors["name"] : null
+                  }
+                />
               </div>
               <div className="form-group">
                 <label>Genre</label>
@@ -78,6 +84,13 @@ export class CreateMovie extends Component {
                   name="genre"
                   placeholder="Genre"
                   onChange={this.handleInput}
+                />
+                <Error
+                  error={
+                    this.state.errors["genre"]
+                      ? this.state.errors["genre"]
+                      : null
+                  }
                 />
               </div>
               <div className="form-group">
@@ -90,6 +103,13 @@ export class CreateMovie extends Component {
                   name="length"
                   onChange={this.handleInput}
                 />
+                <Error
+                  error={
+                    this.state.errors["length"]
+                      ? this.state.errors["length"]
+                      : null
+                  }
+                />
               </div>
               <div className="form-group">
                 <label>Image</label>
@@ -101,6 +121,13 @@ export class CreateMovie extends Component {
                   placeholder="Image"
                   name="image"
                   onChange={this.handleImage}
+                />
+                <Error
+                  error={
+                    this.state.errors["image"]
+                      ? this.state.errors["image"]
+                      : null
+                  }
                 />
               </div>
               <div className="form-group">
