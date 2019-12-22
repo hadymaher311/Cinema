@@ -9,6 +9,7 @@ import GuestRoute from "./components/GuestRoute";
 import AuthUserRoute from "./components/AuthUserRoute";
 import Layout from "./components/Layout";
 import Movies from "./pages/user/Movies";
+import Movie from "./pages/user/Movie";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
           <Route exact path="/" component={Welcome} />
           <GuestRoute path="/login" component={Login} />
           <GuestRoute path="/register" component={Register} />
-          <AuthUserRoute path="/movies" component={Movies} />
+          <AuthUserRoute exact path="/movies" component={Movies} />
+          <AuthUserRoute path="/movies/:id" component={Movie} />
       </Layout>
     </Router>
   );

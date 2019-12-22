@@ -38,7 +38,10 @@ export default class Movies extends Component {
           <div className="row mt-5 mb-5">
             {movies.map(movie => (
               <div key={movie.id} className="col-md-3">
-                <Link to="/" style={{ textDecoration: "none" }}>
+                <Link
+                  to={`/movies/${movie.id}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <div className="card mb-3">
                     <img
                       src={movie.image.image_url}
