@@ -4,6 +4,7 @@ import { ListGroup } from "react-bootstrap";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { MovieHeader } from "../../components/MovieHeader";
+import Swal from "sweetalert2";
 
 export default class Movie extends Component {
   state = {
@@ -17,7 +18,7 @@ export default class Movie extends Component {
         this.setState({ movie: response.data.data });
       })
       .catch(error => {
-        console.log(error);
+        Swal.fire("Oops...", "Something went wrong!", "error");
       });
   }
   render() {

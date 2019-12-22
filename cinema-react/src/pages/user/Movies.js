@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 import Paginate from "../../components/Paginate";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import Swal from "sweetalert2";
 
 export default class Movies extends Component {
   state = {
@@ -21,7 +22,7 @@ export default class Movies extends Component {
         this.setState({ movies: response.data.data, meta: response.data.meta });
       })
       .catch(error => {
-        console.log(error);
+        Swal.fire("Oops...", "Something went wrong!", "error");
       });
   };
 

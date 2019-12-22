@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import { MovieHeader } from "../../components/MovieHeader";
+import Swal from "sweetalert2";
 
 export default class Screening extends Component {
   state = {
@@ -30,7 +31,7 @@ export default class Screening extends Component {
         this.setState({ screening: response.data.data });
       })
       .catch(error => {
-        console.log(error);
+        Swal.fire("Oops...", "Something went wrong!", "error");
       });
   };
 

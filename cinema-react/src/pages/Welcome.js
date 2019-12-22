@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import { connect } from "react-redux";
+import Swal from "sweetalert2";
 
 class Welcome extends Component {
   state = {
@@ -14,7 +15,7 @@ class Welcome extends Component {
         this.setState({ movies: response.data.data });
       })
       .catch(error => {
-        console.log(error);
+        Swal.fire("Oops...", "Something went wrong!", "error");
       });
   }
 

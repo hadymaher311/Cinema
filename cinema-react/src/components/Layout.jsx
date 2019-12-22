@@ -23,6 +23,13 @@ function Layout(props) {
           ) : (
             ""
           )}
+          {props.loggedIn && props.is_admin ? (
+            <React.Fragment>
+              <Nav.Link href="/admin/users">Users</Nav.Link>
+            </React.Fragment>
+          ) : (
+            ""
+          )}
         </Nav>
         <Nav>
           {!props.loggedIn ? (
@@ -52,7 +59,8 @@ function Layout(props) {
 
 const mapStateToProps = state => {
   return {
-    loggedIn: state.auth.loggedIn
+    loggedIn: state.auth.loggedIn,
+    is_admin: state.auth.user.is_admin
   };
 };
 

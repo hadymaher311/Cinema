@@ -10,6 +10,8 @@ import Layout from "./components/Layout";
 import Movies from "./pages/user/Movies";
 import Movie from "./pages/user/Movie";
 import Screening from "./pages/user/Screening";
+import AuthAdminRoute from "./components/AuthAdminRoute";
+import Users from "./pages/admin/Users";
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
           <AuthUserRoute exact path="/movies" component={Movies} />
           <AuthUserRoute path="/movies/:id" component={Movie} />
           <AuthUserRoute path="/screening/:id" component={Screening} />
+          <AuthAdminRoute path="/admin/users" component={Users} />
       </Layout>
     </Router>
   );
