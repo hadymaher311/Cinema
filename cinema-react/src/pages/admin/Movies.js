@@ -83,7 +83,7 @@ const columns = [
 ];
 
 const actions = (
-  <Link to="/" className="btn btn-success">
+  <Link to="/admin/movies/create" className="btn btn-success">
     + Add new Movie
   </Link>
 );

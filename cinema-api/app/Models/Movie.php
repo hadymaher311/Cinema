@@ -12,6 +12,10 @@ class Movie extends Model implements HasMedia
 {
     use HasMediaTrait;
 
+    protected $fillable = [
+        'name', 'genre', 'length' 
+    ];
+
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('card')
