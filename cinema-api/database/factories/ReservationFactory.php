@@ -9,15 +9,14 @@ use App\Models\Reservation;
 use Faker\Generator as Faker;
 
 $factory->define(Reservation::class, function (Faker $faker) {
+    $screening = Screening::all()->random();
     return [
         'user_id' => function() {
             return User::all()->random();
         },
-        'screening_id' => function() {
-            return Screening::all()->random();
-        },
-        'seat_id' => function() {
-            return Seat::all()->random();
+        'screening_id' => $screening,
+        'seat_id' => function() use ($screening) {
+            return $screening->screen->seats->random();
         },
     ];
 });

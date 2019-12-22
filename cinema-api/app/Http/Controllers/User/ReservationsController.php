@@ -22,7 +22,7 @@ class ReservationsController extends Controller
         return new ScreeningResource($screening->load(['reservations', 'movie', 'screen.seats']));
     }
 
-    public function srore(Request $request, Seat $seat, Screening $screening)
+    public function store(Request $request, Seat $seat, Screening $screening)
     {
         $reservation = Reservation::where([
             'screening_id'=> $screening->id,
